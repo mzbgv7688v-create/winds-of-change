@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#172019">
+<title>Winds of Change — Rhodesia 1962</title>
+<style>
+:root{--ink:#182019;--paper:#e7dfc8;--paper2:#d7cba9;--red:#8e3429;--green:#314b36;--gold:#a68a4c;--muted:#756f60;--dark:#101510}
+*{box-sizing:border-box} body{margin:0;background:#0e130f;color:var(--ink);font-family:Georgia,"Times New Roman",serif;min-height:100vh}
+button{font:inherit}.app{max-width:720px;margin:auto;min-height:100vh;background:var(--paper);box-shadow:0 0 60px #0008;position:relative;overflow:hidden}
+.app:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.14;background-image:repeating-linear-gradient(0deg,#0000 0 3px,#342 4px)}
+header{background:var(--dark);color:#eee8d4;padding:calc(14px + env(safe-area-inset-top)) 18px 12px;border-bottom:4px solid var(--gold);position:relative}
+.kicker{font:700 11px Arial,sans-serif;letter-spacing:2.2px;color:#c8b77e}.brand{font-size:29px;letter-spacing:1px;margin:3px 0}.sub{font:12px Arial,sans-serif;color:#bcb7a8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#b8ad8f;border-bottom:1px solid #9b9074}
+.stat{background:#ded5bb;padding:8px 7px;text-align:center}.stat b{display:block;font:700 17px Arial,sans-serif}.stat span{font:9px Arial,sans-serif;text-transform:uppercase;letter-spacing:.7px;color:#615d52}
+main{padding:15px 15px 96px;position:relative}.date{display:flex;justify-content:space-between;align-items:center;font:700 11px Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;color:#625c4f;margin:2px 3px 10px}
+.card{background:#eee7d4;border:1px solid #9d9278;box-shadow:0 8px 20px #3a342520;padding:20px 18px 17px;position:relative;min-height:330px}
+.stamp{position:absolute;right:13px;top:12px;border:2px solid var(--red);color:var(--red);padding:3px 6px;transform:rotate(5deg);font:700 9px Arial,sans-serif;letter-spacing:1px;opacity:.8}
+.eyebrow{font:700 10px Arial,sans-serif;letter-spacing:1.6px;color:var(--red);text-transform:uppercase;margin-bottom:12px}
+h2{font-size:25px;line-height:1.05;margin:0 70px 13px 0}.body{font-size:16px;line-height:1.48}.intel{border-left:3px solid var(--gold);padding:8px 10px;margin:14px 0;background:#dcd2b7;font-size:13px;color:#514d43}
+.choices{display:grid;gap:10px;margin-top:16px}.choice{border:1px solid #655f50;background:#d9cfb4;padding:12px;text-align:left;cursor:pointer;color:#191d18}.choice:hover,.choice:active{background:#c9bd9d}.choice strong{display:block;font:700 13px Arial,sans-serif;margin-bottom:3px}.choice small{font-size:12px;color:#625d50}
+.tabs{position:absolute;bottom:0;left:0;right:0;background:#111711;color:#d8d2c2;display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom);border-top:3px solid var(--gold)}
+.tab{background:none;border:0;color:inherit;padding:13px 3px 11px;font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:.6px}.tab.active{background:#263027;color:#fff}
+.panel{display:none}.panel.active{display:block}.meter{margin:11px 0}.meterline{display:flex;justify-content:space-between;font:12px Arial,sans-serif;margin-bottom:4px}.bar{height:9px;background:#b9ae91;border:1px solid #8f8469}.fill{height:100%;background:#435a42}
+.region{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #b6aa8d;font:13px Arial,sans-serif}.log{font-size:13px;line-height:1.4;padding:9px 0;border-bottom:1px dotted #a3987d}
+.start{padding:28px 20px 110px}.start h1{font-size:43px;line-height:.9;margin:22px 0 10px}.start p{font-size:17px;line-height:1.5}.seal{width:90px;height:90px;border:3px double var(--green);border-radius:50%;display:grid;place-items:center;text-align:center;font:700 11px Arial,sans-serif;letter-spacing:1px;transform:rotate(-4deg);margin:30px 0}
+.startbtn{width:100%;padding:15px;background:var(--green);color:#fff;border:0;font:700 13px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase}
+.note{font:11px Arial,sans-serif;color:#6d6657;margin-top:12px}.ending{border:3px double var(--red);padding:16px;margin-top:16px;background:#e4dac0}
+
+.mapcard{padding:12px}.maptools{display:flex;gap:6px;margin:0 0 9px;overflow:auto}.maptool{white-space:nowrap;border:1px solid #756d59;background:#d8ceb2;padding:8px 10px;font:700 10px Arial,sans-serif;text-transform:uppercase}.maptool.active{background:#26382b;color:#fff}
+.mapwrap{background:#c8bea3;border:1px solid #887e65;padding:7px}.strategy-map{width:100%;height:auto;display:block;touch-action:manipulation}
+.rgn{stroke:#eee6cf;stroke-width:3;cursor:pointer;transition:.15s}.rgn.sel{stroke:#8e3429;stroke-width:6}.rgnlabel{font:700 12px Arial,sans-serif;fill:#171c17;pointer-events:none;text-anchor:middle}.city{fill:#171c17;stroke:#eee6cf;stroke-width:1.5}.citylabel{font:700 9px Arial,sans-serif;fill:#171c17;pointer-events:none}
+.neighbor{fill:#aaa287;stroke:#756d59;stroke-width:2}.neighborlabel{font:700 10px Arial,sans-serif;fill:#595344;letter-spacing:1px;text-anchor:middle}.route{fill:none;stroke:#8e3429;stroke-width:3;stroke-dasharray:7 5;opacity:.75}.routeLabel{font:700 9px Arial,sans-serif;fill:#8e3429}
+.regionpanel{margin-top:10px;background:#eee7d4;border:1px solid #8f856c;padding:12px}.regionhead{display:flex;justify-content:space-between;gap:8px;align-items:start}.regionhead h3{margin:0;font-size:20px}.badge{font:700 9px Arial,sans-serif;padding:4px 6px;border:1px solid #7b725d;text-transform:uppercase}
+.regionstats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.rstat{background:#d8ceb2;padding:7px;text-align:center}.rstat b{display:block;font:700 15px Arial,sans-serif}.rstat span{font:8px Arial,sans-serif;text-transform:uppercase}.maplegend{display:flex;gap:10px;flex-wrap:wrap;font:10px Arial,sans-serif;margin:8px 1px}.dot{display:inline-block;width:9px;height:9px;margin-right:3px;border:1px solid #5e584a}
+
+@media(min-width:700px){body{padding:24px 0}.app{min-height:900px}}
+</style>
+</head>
+<body><div class="app" id="app"></div>
+<script>
+const EVENTS=[
+{id:"franchise",date:"March 1962",tag:"CABINET PAPER 14/62",title:"The Franchise Question",body:"The constitutional settlement has widened African representation, but political power remains overwhelmingly concentrated among voters who meet property, income and education qualifications. London is watching. African nationalists call the reforms cosmetic.",intel:"The Cabinet is divided. Reformists argue that a credible path to broader representation could secure Britain's confidence. Conservatives warn that moving faster will fracture the governing coalition.",choices:[
+{t:"Announce a staged expansion of the African franchise",s:"Trade white confidence for legitimacy and a better relationship with London.",d:{leg:10,white:-10,brit:12,rad:-8,tre:-1},next:"land"},
+{t:"Defend the existing qualifications",s:"Preserve the political order and insist advancement must be earned.",d:{leg:-8,white:8,brit:-9,rad:10},next:"land"}]},
+{id:"land",date:"September 1962",tag:"MINISTRY OF LANDS",title:"Land, Credit and the Rural Majority",body:"Commercial agriculture is productive, but land distribution and access to capital remain among the most combustible grievances in the country. A proposal would fund voluntary land purchases and agricultural credit for African farmers.",intel:"Treasury officials warn the program is expensive. Security officials quietly argue that prosperous farmers with title deeds make poor recruits for revolutionary movements.",choices:[
+{t:"Fund land purchase, title and agricultural credit",s:"Expensive now; potentially transformative later.",d:{tre:-12,leg:12,white:-5,rad:-12,stab:5},next:"officers"},
+{t:"Protect the existing land settlement",s:"Avoid disruption to commercial agriculture and the budget.",d:{tre:4,white:7,leg:-10,rad:11},next:"officers"}]},
+{id:"officers",date:"May 1963",tag:"DEFENCE COMMITTEE",title:"Who Commands the Army?",body:"African soldiers already form an important part of the security forces. A proposal before Cabinet would accelerate African officer commissioning and open senior civil-service tracks.",intel:"The immediate military effect is small. The symbolic effect is not. Some senior officers fear politicizing the services; others say a state that asks men to fight for it must let them lead it.",choices:[
+{t:"Open the officer corps and senior service",s:"Build institutions that look like the country they govern.",d:{leg:9,white:-5,sec:3,rad:-6},next:"federation"},
+{t:"Keep advancement gradual and controlled",s:"Preserve cohesion among the existing leadership cadre.",d:{white:5,leg:-6,rad:7},next:"federation"}]},
+{id:"federation",date:"December 1963",tag:"SECRET — PRIME MINISTER",title:"The Federation Dies",body:"The Federation of Rhodesia and Nyasaland is dissolving. Northern Rhodesia and Nyasaland are moving toward African-majority independence. Southern Rhodesia is increasingly alone.",intel:"This is more than a constitutional change. The strategic environment is narrowing, and London's willingness to grant independence without a convincing settlement is fading.",choices:[
+{t:"Seek a new constitutional conference with Britain",s:"Offer a fixed timetable toward universal suffrage in exchange for recognized independence.",d:{brit:16,leg:10,white:-12,rad:-8},next:"nationalists"},
+{t:"Prepare for independence on our own terms",s:"Begin contingency planning if London refuses sovereignty.",d:{brit:-15,white:12,leg:-8,rad:8},flags:["udiTrack"],next:"nationalists"}]},
+{id:"nationalists",date:"August 1964",tag:"CIO ASSESSMENT",title:"Nationalism Fractures",body:"The African nationalist movement is splitting. Rival organizations compete for recruits, foreign patrons and the claim to represent the majority. Detentions could disrupt both networks before they consolidate.",intel:"CIO assesses the organizations as divided and vulnerable. The estimate may be correct. It may also confuse organizational weakness with lack of popular grievance.",choices:[
+{t:"Permit political organization under strict nonviolence rules",s:"Try to pull nationalist competition into constitutional politics.",d:{leg:10,sec:-2,rad:-12,brit:8},next:"independence"},
+{t:"Detain the leadership and restrict the movements",s:"Exploit the split before insurgent structures mature.",d:{sec:8,leg:-12,rad:16,brit:-8},next:"independence"}]},
+{id:"independence",date:"October 1965",tag:"MOST SECRET",title:"London Will Not Yield",body:"Negotiations have reached the decisive point. Britain will not grant independence under a constitution it believes permanently entrenches minority political control. Cabinet must decide whether compromise is still possible.",intel:"An illegal declaration may survive economically if South Africa and Portuguese Mozambique keep trade moving. Survival, however, is not the same thing as recognition.",choices:[
+{t:"Accept a binding transition and secure legal independence",s:"The state survives, but the political order will change irreversibly.",d:{brit:25,leg:18,white:-18,rad:-14,stab:8},ending:"settlement"},
+{t:"Declare independence unilaterally",s:"Take sovereignty now and gamble that sanctions and isolation can be endured.",d:{brit:-30,leg:-20,white:18,tre:-10,rad:18,sec:5},flags:["UDI"],next:"sanctions"}]},
+{id:"sanctions",date:"January 1966",tag:"ECONOMIC WAR ROOM",title:"Sanctions Begin to Bite",body:"Britain and the United Nations are tightening economic pressure. Oil and finance are the immediate vulnerabilities, though regional partners and covert trade routes offer ways around the embargo.",intel:"Industry can substitute for some imports. The larger danger may be cumulative: investment, migration, diplomatic isolation and dependence on Pretoria.",choices:[
+{t:"Build a sanctions-busting state economy",s:"Subsidize local industry and deepen covert regional trade.",d:{tre:-8,stab:7,white:4,brit:-6,leg:-5},next:"war"},
+{t:"Reopen talks before positions harden",s:"Test whether sovereignty can be preserved through a late compromise.",d:{brit:14,white:-10,leg:8,rad:-5},next:"war"}]},
+{id:"war",date:"April 1967",tag:"JOINT OPERATIONS",title:"The War Crosses the Border",body:"Armed infiltrators are entering the country. The security forces believe they can destroy the early groups decisively. Cabinet must determine whether this is primarily a military problem or a political one.",intel:"Tactical superiority is real. But every security operation also changes rural attitudes, foreign support and the insurgents' recruiting environment.",choices:[
+{t:"Pair security operations with rural political reform",s:"Fight infiltrators while attacking the grievances that sustain recruitment.",d:{sec:5,tre:-7,leg:10,rad:-10,white:-4},ending:"reformwar"},
+{t:"Crush the insurgency before it can mature",s:"Concentrate resources on intelligence, mobility and aggressive operations.",d:{sec:14,tre:-8,leg:-7,rad:12,white:5},ending:"fortress"}]}
+];
+const base={leg:35,white:78,brit:48,tre:72,stab:68,sec:62,rad:32,flags:[],history:[],event:"franchise",overlay:"control",selectedRegion:"manicaland",regions:{
+matabeleland:{name:"Matabeleland",control:91,influence:8,infra:58,forces:10,note:"Bulawayo anchors the southwest. ZAPU networks may become strategically important here."},
+midlands:{name:"Midlands",control:94,influence:5,infra:64,forces:8,note:"Central transport links make the Midlands vital to national mobility and logistics."},
+mashwest:{name:"Mashonaland West",control:92,influence:6,infra:61,forces:7,note:"Commercial agriculture and the Salisbury approaches dominate planning."},
+masheast:{name:"Mashonaland East",control:88,influence:10,infra:49,forces:8,note:"Eastern approaches place this region closer to future infiltration corridors."},
+manicaland:{name:"Manicaland",control:84,influence:14,infra:43,forces:9,note:"The Mozambique frontier makes Manicaland strategically exposed if Portuguese control collapses."},
+victoria:{name:"Victoria",control:90,influence:7,infra:45,forces:6,note:"A large southern sector with long lines of communication and limited administrative reach."}
+}};
+let state=JSON.parse(localStorage.getItem("wocSave")||"null")||structuredClone(base);
+let screen=localStorage.getItem("wocStarted")?"game":"start",tab="brief";
+const clamp=n=>Math.max(0,Math.min(100,n));
+function save(){localStorage.setItem("wocSave",JSON.stringify(state));localStorage.setItem("wocStarted","1")}
+function stat(label,v){return `<div class="stat"><b>${clamp(v)}</b><span>${label}</span></div>`}
+function header(){return `<header><div class="kicker">A POLITICAL GRAND STRATEGY</div><div class="brand">WINDS OF CHANGE</div><div class="sub">Campaign 01 · Southern Rhodesia · 1962–</div></header><div class="stats">${stat("Legitimacy",state.leg)}${stat("Treasury",state.tre)}${stat("Stability",state.stab)}</div>`}
+function tabs(){return `<nav class="tabs"><button class="tab ${tab=="brief"?"active":""}" onclick="setTab('brief')">Briefing</button><button class="tab ${tab=="nation"?"active":""}" onclick="setTab('nation')">Nation</button><button class="tab ${tab=="map"?"active":""}" onclick="setTab('map')">Map</button><button class="tab ${tab=="ledger"?"active":""}" onclick="setTab('ledger')">Ledger</button></nav>`}
+function start(){return `<div class="start"><div class="kicker" style="color:#6b3028">1956–1994</div><h1>WINDS<br>OF CHANGE</h1><div class="seal">CABINET<br>OFFICE<br>★<br>CONFIDENTIAL</div><p>A political grand strategy about the dismantling of colonial Africa and the states that emerged from it.</p><p><b>Campaign 01: Southern Rhodesia.</b> You do not play Ian Smith. You play the continuity of the state. Leaders may rise, governments may fall, and history is not obliged to cooperate.</p><button class="startbtn" onclick="begin()">Begin — March 1962</button><div class="note">Prototype v0.2 · Strategic Map · Decisions persist automatically on this device.</div></div>`}
+function current(){return EVENTS.find(x=>x.id===state.event)}
+function brief(){
+ if(state.ending)return ending();
+ let e=current(); if(!e)return ending();
+ return `<div class="date"><span>${e.date}</span><span>Cabinet briefing</span></div><article class="card"><div class="stamp">${e.tag}</div><div class="eyebrow">Decision required</div><h2>${e.title}</h2><div class="body">${e.body}</div><div class="intel"><b>INTELLIGENCE NOTE:</b> ${e.intel}</div><div class="choices">${e.choices.map((c,i)=>`<button class="choice" onclick="choose(${i})"><strong>${c.t}</strong><small>${c.s}</small></button>`).join("")}</div></article>`}
+function nation(){let ms=[["African legitimacy",state.leg],["White confidence",state.white],["Relations with Britain",state.brit],["Security capacity",state.sec],["National stability",state.stab],["Nationalist radicalization",state.rad]];return `<div class="date"><span>State assessment</span><span>0–100</span></div><div class="card">${ms.map(m=>`<div class="meter"><div class="meterline"><b>${m[0]}</b><span>${clamp(m[1])}</span></div><div class="bar"><div class="fill" style="width:${clamp(m[1])}%"></div></div></div>`).join("")}<div class="intel">These are political estimates, not perfect information. Later versions will make some assessments uncertain or deliberately misleading.</div></div>`}
+function map(){
+ if(!state.regions)state.regions=structuredClone(base.regions);
+ const ov=state.overlay||"control", sel=state.selectedRegion||"manicaland", r=state.regions[sel];
+ const color=(k)=>{let x=state.regions[k]; if(ov==="influence"){let v=x.influence;return v>45?"#8f5147":v>25?"#b68165":v>12?"#c7a57b":"#d5c9a8"} if(ov==="infra"){let v=x.infra;return v>65?"#4d664d":v>50?"#758066":v>35?"#9a9878":"#c1b58f"} let v=x.control;return v>90?"#526b50":v>80?"#75806a":v>65?"#9b9673":"#b77b67"};
+ const udi=state.flags.includes("UDI");
+ return `<div class="date"><span>Strategic map</span><span>${udi?"Unrecognized state":"Southern Rhodesia"}</span></div><div class="card mapcard">
+ <div class="maptools"><button class="maptool ${ov==="control"?"active":""}" onclick="setOverlay('control')">Control</button><button class="maptool ${ov==="influence"?"active":""}" onclick="setOverlay('influence')">Insurgent influence</button><button class="maptool ${ov==="infra"?"active":""}" onclick="setOverlay('infra')">Infrastructure</button></div>
+ <div class="mapwrap"><svg class="strategy-map" viewBox="0 0 620 500" role="img" aria-label="Interactive strategic sectors of Southern Rhodesia">
+ <path class="neighbor" d="M34 52 L174 22 224 93 191 151 91 169 35 126Z"/><text class="neighborlabel" x="112" y="92">ZAMBIA</text>
+ <path class="neighbor" d="M442 39 L587 52 606 384 514 450 472 390 510 291 485 184Z"/><text class="neighborlabel" x="548" y="205" transform="rotate(90 548 205)">MOZAMBIQUE</text>
+ <path class="neighbor" d="M84 397 L212 462 159 492 48 462 24 365Z"/><text class="neighborlabel" x="99" y="447">BOTSWANA</text>
+ <path class="neighbor" d="M202 461 L514 450 466 498 180 498Z"/><text class="neighborlabel" x="349" y="482">SOUTH AFRICA</text>
+ <polygon class="rgn ${sel==="mashwest"?"sel":""}" onclick="selectRegion('mashwest')" fill="${color("mashwest")}" points="191,151 295,104 365,145 349,244 240,250 164,205"/>
+ <polygon class="rgn ${sel==="masheast"?"sel":""}" onclick="selectRegion('masheast')" fill="${color("masheast")}" points="365,145 485,184 510,291 402,302 349,244"/>
+ <polygon class="rgn ${sel==="manicaland"?"sel":""}" onclick="selectRegion('manicaland')" fill="${color("manicaland")}" points="402,302 510,291 472,390 410,374 371,325"/>
+ <polygon class="rgn ${sel==="midlands"?"sel":""}" onclick="selectRegion('midlands')" fill="${color("midlands")}" points="240,250 349,244 402,302 371,325 300,363 221,328"/>
+ <polygon class="rgn ${sel==="matabeleland"?"sel":""}" onclick="selectRegion('matabeleland')" fill="${color("matabeleland")}" points="91,169 164,205 240,250 221,328 202,461 84,397 53,280"/>
+ <polygon class="rgn ${sel==="victoria"?"sel":""}" onclick="selectRegion('victoria')" fill="${color("victoria")}" points="221,328 300,363 371,325 410,374 472,390 514,450 202,461"/>
+ <text class="rgnlabel" x="270" y="190">MASH. WEST</text><text class="rgnlabel" x="416" y="224">MASH. EAST</text><text class="rgnlabel" x="445" y="339">MANICALAND</text><text class="rgnlabel" x="306" y="298">MIDLANDS</text><text class="rgnlabel" x="145" y="300">MATABELELAND</text><text class="rgnlabel" x="347" y="413">VICTORIA</text>
+ <circle class="city" cx="332" cy="211" r="5"/><text class="citylabel" x="340" y="208">SALISBURY</text><circle class="city" cx="147" cy="330" r="5"/><text class="citylabel" x="155" y="327">BULAWAYO</text>
+ ${state.event==="war"||state.ending?`<path class="route" d="M542 267 C500 268 474 284 442 307"/><path class="route" d="M550 194 C504 188 470 192 433 211"/><text class="routeLabel" x="486" y="257">INFILTRATION</text>`:""}
+ </svg></div>
+ <div class="maplegend"><span><i class="dot" style="background:#526b50"></i>${ov==="control"?"Firm":ov==="influence"?"Low":"High"}</span><span><i class="dot" style="background:#9b9673"></i>Contested</span><span><i class="dot" style="background:#b77b67"></i>${ov==="control"?"Weak":ov==="influence"?"High":"Low"}</span></div>
+ <div class="regionpanel"><div class="regionhead"><h3>${r.name}</h3><span class="badge">${r.control>=90?"Firm":r.control>=80?"Watch":"Contested"}</span></div><div class="regionstats"><div class="rstat"><b>${r.control}%</b><span>Gov. control</span></div><div class="rstat"><b>${r.influence}%</b><span>Insurgent</span></div><div class="rstat"><b>${r.infra}</b><span>Infrastructure</span></div></div><p style="font-size:13px;line-height:1.4;margin:10px 0 3px">${r.note}</p><div class="note">Security allocation: ${r.forces} points · Tap another region to inspect it.</div></div>
+ <div class="note">Prototype strategic sectors are a gameplay abstraction over the country's real geography, not a claim that these were exact 1962 administrative boundaries.</div></div>`}
+function setOverlay(x){state.overlay=x;save();render()}
+function selectRegion(x){state.selectedRegion=x;save();render()}
+function ledger(){return `<div class="date"><span>Decision ledger</span><span>${state.history.length} entries</span></div><div class="card"><h2>Cabinet Record</h2>${state.history.length?state.history.slice().reverse().map(h=>`<div class="log"><b>${h.date}</b><br>${h.choice}</div>`).join(""):"<p>No decisions recorded.</p>"}<button class="choice" style="margin-top:18px" onclick="resetGame()"><strong>Reset campaign</strong><small>Erase this local save and return to March 1962.</small></button></div>`}
+function ending(){let E={
+settlement:["A Different Independence","You chose recognized sovereignty at the price of irreversible political transition. The old order will not survive, but the state may. The next chapter would test whether institutions can outrun radicalization."],
+reformwar:["Reform Under Fire","The insurgency has begun, but it now competes with a constitutional route and a government trying to broaden its legitimacy. This is not victory. It is a very different war."],
+fortress:["The Fortress State","The security forces enter the war with formidable tactical advantages. The unanswered question is whether battlefield dominance can compensate for isolation, demographics and political legitimacy."]
+}[state.ending]||["The Story Continues","The prototype has reached its current endpoint."];
+return `<div class="date"><span>Prototype endpoint</span><span>Alternate history</span></div><div class="card"><div class="eyebrow">Campaign outcome</div><h2>${E[0]}</h2><p class="body">${E[1]}</p><div class="ending"><b>This is the end of v0.2, not the campaign.</b><br><br>Your decisions are preserved in the Ledger. Future builds can continue this state into UDI, sanctions, the Bush War, Mozambique's independence and the settlement crisis of the late 1970s.</div><button class="choice" style="margin-top:15px" onclick="resetGame()"><strong>Play again</strong><small>Try another political path.</small></button></div>`}
+function render(){if(screen==="start"){app.innerHTML=start();return}let content=tab==="brief"?brief():tab==="nation"?nation():tab==="map"?map():ledger();app.innerHTML=header()+`<main>${content}</main>`+tabs()}
+function begin(){screen="game";save();render()}
+function setTab(x){tab=x;render()}
+function choose(i){let e=current(),c=e.choices[i];for(let k in c.d)state[k]=clamp((state[k]||0)+c.d[k]);
+const R=state.regions;
+if(e.id==="land"){Object.values(R).forEach(r=>{r.influence=clamp(r.influence+(i===0?-4:5));r.control=clamp(r.control+(i===0?2:-2))})}
+if(e.id==="officers"){Object.values(R).forEach(r=>r.control=clamp(r.control+(i===0?2:0)))}
+if(e.id==="nationalists"){Object.values(R).forEach(r=>r.influence=clamp(r.influence+(i===0?-5:7)))}
+if(e.id==="sanctions"){Object.values(R).forEach(r=>r.infra=clamp(r.infra+(i===0?2:-2)))}
+if(e.id==="war"){["manicaland","masheast"].forEach(k=>{R[k].forces+=i===1?7:3;R[k].control=clamp(R[k].control+(i===1?8:4));R[k].influence=clamp(R[k].influence+(i===1?6:-7))})}
+if(c.flags)state.flags.push(...c.flags);state.history.push({date:e.date,event:e.title,choice:c.t});if(c.ending)state.ending=c.ending;else state.event=c.next;save();render()}
+function resetGame(){localStorage.removeItem("wocSave");localStorage.removeItem("wocStarted");state=structuredClone(base);screen="start";tab="brief";render()}
+render();
+</script></body></html>
